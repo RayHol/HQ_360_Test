@@ -78,13 +78,7 @@
       { cubeMapPreviewUrl: urlPrefix + "/" + data.id + "/preview.jpg" });
     var geometry = new Marzipano.CubeGeometry(data.levels);
 
-    var limiter = function(parameters) {
-      var fov = parameters.fov;
-      var yaw = parameters.yaw;
-      var pitch = parameters.pitch;
-    
-      // Clamp FOV between 15° and 120°
-      fov = Math.max(15 * Math.PI / 180, Math.min(120 * Math.PI / 180, fov));
+    var limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180, 120*Math.PI/180);
     var view = new Marzipano.RectilinearView(data.initialViewParameters, limiter);
 
     var scene = viewer.createScene({
@@ -172,8 +166,8 @@
   var viewOutElement = document.querySelector('#viewOut');
 
   // Dynamic parameters for controls.
-  var velocity = 2.0;
-  var friction = 1.5;
+  var velocity = 0.7;
+  var friction = 3;
 
   // Associate view controls with elements.
   var controls = viewer.controls();

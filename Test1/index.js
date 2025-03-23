@@ -166,8 +166,8 @@
   var viewOutElement = document.querySelector('#viewOut');
 
   // Dynamic parameters for controls.
-  var velocity = 0.7;
-  var friction = 3;
+  var velocity = 2.0;
+  var friction = 1.5;
 
   // Associate view controls with elements.
   var controls = viewer.controls();

@@ -78,12 +78,8 @@
       { cubeMapPreviewUrl: urlPrefix + "/" + data.id + "/preview.jpg" });
     var geometry = new Marzipano.CubeGeometry(data.levels);
 
-    var limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 15*Math.PI/180, 120*Math.PI/180);
-    var view = new Marzipano.RectilinearView({
-      yaw: data.initialViewParameters.yaw,
-      pitch: data.initialViewParameters.pitch,
-      fov: Math.PI / 2 // Explicitly set initial zoom to 90 degrees clearly here
-    }, limiter);
+    var limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180, 120*Math.PI/180);
+    var view = new Marzipano.RectilinearView(data.initialViewParameters, limiter);
 
     var scene = viewer.createScene({
       source: source,
@@ -187,21 +183,13 @@
   }
 
   function switchScene(scene) {
-  stopAutorotate();
-
-  // Explicitly set initial view parameters here instead of using data.initialViewParameters
-  scene.view.setParameters({
-    yaw: scene.data.initialViewParameters.yaw,
-    pitch: scene.data.initialViewParameters.pitch,
-    fov: Math.PI / 2  // force explicit 90 degrees initial zoom
-  });
-
-  scene.scene.switchTo();
-  startAutorotate();
-  updateSceneName(scene);
-  updateSceneList(scene);
-}
-
+    stopAutorotate();
+    scene.view.setParameters(scene.data.initialViewParameters);
+    scene.scene.switchTo();
+    startAutorotate();
+    updateSceneName(scene);
+    updateSceneList(scene);
+  }
 
   function updateSceneName(scene) {
     sceneNameElement.innerHTML = sanitize(scene.data.name);

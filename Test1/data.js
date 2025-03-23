@@ -32,19 +32,19 @@ var APP_DATA = {
       ],
       "faceSize": 5750,
       "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
+        "yaw": 0.0446891358250916,
+        "pitch": 0.10202175224063836,
+        "fov": 1.1712771240785709
       },
       "linkHotspots": [],
       "infoHotspots": []
     }
   ],
-  "name": "Project Title",
+  "name": "HQ_360 test1",
   "settings": {
     "mouseViewMode": "drag",
     "autorotateEnabled": true,
-    "fullscreenButton": false,
-    "viewControlButtons": false
+    "fullscreenButton": true,
+    "viewControlButtons": true
   }
 };

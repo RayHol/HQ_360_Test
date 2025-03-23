@@ -187,13 +187,21 @@
   }
 
   function switchScene(scene) {
-    stopAutorotate();
-    scene.view.setParameters(scene.data.initialViewParameters);
-    scene.scene.switchTo();
-    startAutorotate();
-    updateSceneName(scene);
-    updateSceneList(scene);
-  }
+  stopAutorotate();
+
+  // Explicitly set initial view parameters here instead of using data.initialViewParameters
+  scene.view.setParameters({
+    yaw: scene.data.initialViewParameters.yaw,
+    pitch: scene.data.initialViewParameters.pitch,
+    fov: Math.PI / 2  // force explicit 90 degrees initial zoom
+  });
+
+  scene.scene.switchTo();
+  startAutorotate();
+  updateSceneName(scene);
+  updateSceneList(scene);
+}
+
 
   function updateSceneName(scene) {
     sceneNameElement.innerHTML = sanitize(scene.data.name);
